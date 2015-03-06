@@ -18,6 +18,9 @@ Or install it yourself as:
 
     $ gem install asciinemosh
 
+There is a binary file located in /bin that is used by the Terminal.rb class. This has been compiled for OSX (Yosemite). To compile it for your own platform, the source and Makefile is located in /src. You will need libtsm to be installed on your system (https://github.com/skade/libtsm is a good source for OSX).
+
+
 ## Usage
 
     Asciinemosh::Convertor.to_infile(sudosh_timing_file_location, sudosh_script_file_location)
