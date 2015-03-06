@@ -1,6 +1,6 @@
 # Asciinemosh
 
-TODO: Write a gem description
+Converts sudosh log files to asciinema format.
 
 ## Installation
 
