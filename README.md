@@ -20,7 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-Asciinemosh::Convertor.to_infile(sudosh_timing_file_location, sudosh_script_file_location): returns a JSON string in the correct format for upload to asciinema.org.
+    Asciinemosh::Convertor.to_infile(sudosh_timing_file_location, sudosh_script_file_location)
+
+returns a JSON string in the correct format for upload to asciinema.org.
 
 ## Contributing
 
