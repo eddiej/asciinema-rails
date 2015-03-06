@@ -1,4 +1,7 @@
 require 'json'
+require 'asciinema/asciicast'
+require 'asciinema/asciicast_frames_file_updater'
+
 
 module Asciinemosh
   class Convertor
@@ -29,5 +32,14 @@ module Asciinemosh
 
       JSON.pretty_generate(json)
     end
+
+    def self.to_outfile(infile_location)
+      json = JSON.parse(File.read(infile_location))
+      asciicast = Asciicast.new(json['width'], json['height'], json['duration'], infile_location)
+      # asciicast.with_terminal
+      AsciicastFramesFileUpdater.new.update(asciicast)
+      return asciicast.stdout_frames
+    end
+
   end
 end
