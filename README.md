@@ -24,6 +24,10 @@ Or install it yourself as:
 
 returns a JSON string in the correct format for upload to asciinema.org.
 
+## Testing
+
+    bundle exec rspec spec
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/asciinemosh/fork )
