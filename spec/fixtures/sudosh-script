@@ -1,0 +1,8 @@
+]0;@imac:~/Rails[?1034himac:Rails eddiej$ echo 'a'
+a
+]0;@imac:~/Railsimac:Rails eddiej$ echo 'b'
+b
+]0;@imac:~/Railsimac:Rails eddiej$ echo 'c'
+c
+]0;@imac:~/Railsimac:Rails eddiej$ exit
+logout
