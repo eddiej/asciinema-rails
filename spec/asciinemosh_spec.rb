@@ -36,14 +36,15 @@ describe Asciinemosh::Convertor do
         File.open(out_file,"w") do |f|
           f.write(@json)
         end
+        @output = Asciinemosh::Convertor.to_outfile(out_file.path, "/tmp/outilfe.json")
+        out_file.unlink if out_file ## clean up
 
-        @output = Asciinemosh::Convertor.to_outfile(out_file.path)
-        out_file.unlink if out_file
+        puts JSON.parse(@json)['duration']
 
       end
       it "returns valid JSON output" do
-        puts @output.path
-        # puts File.read(@output.path)
+        # puts @output.path
+        # puts stdoutFile.read(@output.path)
       end
     end
   end

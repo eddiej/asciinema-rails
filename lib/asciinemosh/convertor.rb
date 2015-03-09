@@ -4,6 +4,7 @@ require 'asciinema/asciicast_frames_file_updater'
 
 
 module Asciinemosh
+
   class Convertor
     def self.to_infile(sudosh_timing_file_location, sudosh_script_file_location, original_terminal_cols=180, original_terminal_rows=43)
       timings = []
@@ -33,13 +34,12 @@ module Asciinemosh
       JSON.pretty_generate(json)
     end
 
-    def self.to_outfile(infile_location)
+    def self.to_outfile(infile_location, new_outfile_location)
       json = JSON.parse(File.read(infile_location))
       asciicast = Asciicast.new(json['width'], json['height'], json['duration'], infile_location)
-      # asciicast.with_terminal
-      AsciicastFramesFileUpdater.new.update(asciicast)
+      AsciicastFramesFileUpdater.new.update(asciicast, '/tmp/outfile.json')
       return asciicast.stdout_frames
     end
 
-  end
+    end
 end
