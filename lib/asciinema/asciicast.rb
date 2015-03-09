@@ -5,7 +5,7 @@ class Asciicast
 
 
   attr_reader :terminal_columns, :terminal_lines, :duration, :file, :version
-  attr_accessor :stdout_frames
+  attr_accessor :stdout_frames, :snapshot, :snapshot_at
 
   def initialize(terminal_columns, terminal_lines, duration, file_location)
     @terminal_columns = terminal_columns

@@ -1,6 +1,4 @@
-require 'tempfile'
 require 'asciinema/json_file_writer'
-require 'asciinema/film'
 
 class AsciicastFramesFileUpdater
 
@@ -8,8 +6,9 @@ class AsciicastFramesFileUpdater
     @file_writer = file_writer
   end
 
-  def update(asciicast, new_outfile_location)
-    file = File.new(new_outfile_location, 'w')
+  def update(asciicast, outfile_location=nil)
+    file = outfile_location.present? ? File.new(outfile_location, 'w') : Tempfile.new('outfile')
+    # file = File.new(new_outfile_location, 'w')
 
     asciicast.with_terminal do |terminal|
       film = Film.new(asciicast.stdout, terminal)
