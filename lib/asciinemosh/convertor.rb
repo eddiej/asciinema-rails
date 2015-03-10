@@ -22,7 +22,7 @@ module Asciinemosh
         end
       end
       duration = timings.inject(:+)
-
+    
       ## Read segments of the file, defined by the byte offsets in the timing file.
       ## TODO: Write stdout directly to file rather than into memory first.
       stdout = []

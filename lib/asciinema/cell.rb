@@ -27,4 +27,7 @@ class Cell
     [text, brush.as_json]
   end
 
+  def to_f
+    size
+  end
 end

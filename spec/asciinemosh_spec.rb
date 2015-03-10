@@ -35,9 +35,6 @@ describe Asciinemosh::Convertor do
       before do
         @timing_file_location = "#{File.dirname(__FILE__)}/fixtures/sudosh-time"
         @script_file_location = "#{File.dirname(__FILE__)}/fixtures/sudosh-script"
-
-        @timing_file_location = "/Users/eddiej/Downloads/time.log"
-        @script_file_location = "/Users/eddiej/Downloads/script.log"
         
         infile = Asciinemosh::Convertor.to_infile(@timing_file_location, @script_file_location, {original_terminal_cols: 180, original_terminal_rows: 40})
         @output = Asciinemosh::Convertor.to_outfile(infile.path, {outfile_location: '/Users/eddiej/rails/tester/app/views/home/index.json.erb'})
