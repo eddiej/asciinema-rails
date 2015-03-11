@@ -6,7 +6,8 @@ require 'asciinema/cursor'
 
 class Terminal
 
-  BINARY_PATH = (File.dirname(__FILE__) + "/../../bin/" + "terminal").to_s
+  # BINARY_PATH = (File.dirname(__FILE__) + "/../../bin/" + "terminal").to_s
+  BINARY_PATH = 'terminal'
 
   def initialize(width, height)
     @process = Process.new("#{BINARY_PATH} #{width} #{height}")
