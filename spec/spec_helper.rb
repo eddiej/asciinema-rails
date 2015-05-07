@@ -1,3 +1,4 @@
+require 'rails/all'
 # require 'rspec/rails'
 # require 'rspec/autorun'
 

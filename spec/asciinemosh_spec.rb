@@ -37,7 +37,7 @@ describe Asciinemosh::Convertor do
         @script_file_location = "#{File.dirname(__FILE__)}/fixtures/sudosh-script"
         
         infile = Asciinemosh::Convertor.to_infile(@timing_file_location, @script_file_location, {original_terminal_cols: 180, original_terminal_rows: 40})
-        @output = Asciinemosh::Convertor.to_outfile(infile.path, {outfile_location: '/Users/eddiej/rails/tester/app/views/home/index.json.erb'})
+        @output = Asciinemosh::Convertor.to_outfile(infile.path, {outfile_location: '/tmp/index.json.erb'})
         
       end
       it "returns an array of three values" do
