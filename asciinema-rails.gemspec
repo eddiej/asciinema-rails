@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'asciinemosh/version'
+require 'asciinema/rails/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "asciinemosh"
-  spec.version       = Asciinemosh::VERSION
+  spec.name          = "asciinema-rails"
+  spec.version       = Asciinema::Rails::VERSION
   spec.authors       = ["Eddie Johnston"]
   spec.email         = ["eddie@beanstalk.ie"]
   spec.summary       = %q{Converts sudosh log files to asciinema format.}
