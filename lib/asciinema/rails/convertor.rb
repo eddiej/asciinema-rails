@@ -8,6 +8,13 @@ require 'asciinema/asciicast_snapshot_updater'
 module Asciinema
   module Rails
     class Convertor
+
+      # Runs a subprocess and applies handlers for stdout and stderr
+
+      # Params:
+      # - +sudosh_timing_file_location+: path to the Sudosh timing file
+      # - +sudosh_script_file_location+: path to the Sudosh script file
+      # - +options+: option hashs. Currently only supports :outfile_location, the location for the output file 
       def self.to_infile(sudosh_timing_file_location, sudosh_script_file_location, options = {})
         original_terminal_cols = options[:original_terminal_cols] || 180
         original_terminal_rows = options[:original_terminal_rows] || 43

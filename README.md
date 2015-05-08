@@ -12,9 +12,9 @@ gem 'asciinema-rails'
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
-Or install it yourself as:
+Or install it manually:
 
     $ gem install asciinema-rails
 
@@ -23,11 +23,56 @@ There is a binary file located in /bin that is used by the Terminal.rb class. Th
 
 ## Usage
 
+Asciinema-rails consists of two parts - a Convertor module for creatiing Asciinema player files, and an engine that allows you to playback the files from your own site.
+
+### Asciinema::Rails::Convertor
+
+Asciinema::Rails::Convertor has two methods, one to generate player files from Asciinema recording files (JSON), and another to covert Sudosh log files to the Asciinema recording format (which can then be used to create player files.)
+
+
+
     Asciinema::Rails::Convertor.to_infile(sudosh_timing_file_location, sudosh_script_file_location)
 
 returns a JSON string in the correct format for upload to asciinema.org.
 
-## Host Your Own With Rails
+### Rails Engine
+
+To display a player from your app, you need to include the asciineama-rails javascript and stylesheet files in ```app/assets/javascripts/application.js```and ```app/assets/stylesheets/application.css respectively```:
+
+##### application.js
+    //= require asciinema-rails
+
+##### application.css
+    *= require asciinema-rails
+ 
+Then include the player markup and javascript in any of your views:
+
+    <div id='player-container'></div> <!-- the div that will contain the player -->
+
+    <%= javascript_tag do %>
+      $(function() {
+        function createPlayer() {
+          var source = new asciinema.HttpArraySource("recording.json", 1);
+          var snapshot = []
+          var movie = new asciinema.Movie(180, 43, source, snapshot, 9);
+
+          React.renderComponent(
+            asciinema.Player({ autoPlay: true, movie: movie }),
+            $('#player-container')[0]
+          );
+        }
+        createPlayer();
+      });
+    <% end %>
+
+In this case, the Asciinema player file `recording.json` has been placed in the public directory of the app. This can be replaced with a fully qualified url, as long as it points to a player file.
+
+The parameters sent to the asciinema.Movie constructor are the terminal width (cols), height (rows), playback file source, snapshot and playback speed. 
+
+The width, height and snapshot string are returned form the Asciinema::Rails::Convertor.to_outfile method. Typically, player files would be associated with a Rails model, and this information would be saved as model fields when the playback files are generated.
+
+## 
+
 
 Create a new rails application.
 Follow the steps above under Installation.
