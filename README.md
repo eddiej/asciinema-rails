@@ -18,7 +18,16 @@ Or install it manually:
 
     $ gem install asciinema-rails
 
-There is a binary file located in /bin that is used by the Terminal.rb class. This has been compiled for OSX (Yosemite). To compile it for your own platform, the source and Makefile is located in /src. You will need libtsm to be installed on your system (https://github.com/skade/libtsm is a good source for OSX).
+## Prerequisites
+
+Use of this gem depends on the binary `terminal` which must be compiled for your platform before using the gem. There is a source file `terminal.c` located in the `/src` directory of the gem. Before compiling, you will need to install the `libtsm` library on your platform. For Darwin based systems (OSX), a reliable source for libtsm is 
+https://github.com/skade/libtsm.
+
+Once `libtsm` has been installed, compile `terminal.c`:
+
+    $ gcc -O3 -o terminal terminal.c -ltsm
+
+The resulting binary file `terminal` should be placed in `/usr/bin` or similar, or added to the $PATH.
 
 
 ## Usage
