@@ -8,6 +8,10 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <script src="javascript/asciinema-player.js"></script>
+    <script src="javascript/rAF.js"></script>
+    <script src="javascript/react-0.10.0.js"></script>
+    <script src="javascript/screenfull.js"></script>
   </head>
   <body>
     <section class="page-header">
@@ -20,9 +24,29 @@
 
     <section class="main-content">
       <h3>
-<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome tso GitHub Pages.</h3>
 
 <p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+
+
+<div id='player-container'></div>
+
+<script>
+  $(function() {
+    function createPlayer() {
+      var source = new asciinema.HttpArraySource("recording.json", 1);
+      var snapshot = []
+      var movie = new asciinema.Movie(180, 43, source, snapshot, 9);
+
+      React.renderComponent(
+        asciinema.Player({ autoPlay: true, movie: movie }),
+        $('#player-container')[0]
+      );
+    }
+    createPlayer();
+  });
+</script>
+
 
 <pre><code>$ cd your_repo_root/repo_name
 $ git fetch origin
