@@ -1,6 +1,6 @@
 # Asciinema-Rails
 
-Converts sudosh log files to asciinema format.
+Asciinema-rails is a gem that allows you to generate playback files from Asciinema asciicasts or Sudosh log filess and host them from your own website using the bundled player.
 
 ## Installation
 
@@ -20,29 +20,37 @@ Or install it manually:
 
 ## Prerequisites
 
-Use of this gem depends on the binary `terminal` which must be compiled for your platform before using the gem. There is a source file `terminal.c` located in the `/src` directory of the gem. Before compiling, you will need to install the `libtsm` library on your platform. For Darwin based systems (OSX), a reliable source for libtsm is 
-https://github.com/skade/libtsm.
+Asciinema-rails gem depends on the binary `terminal` which must be compiled for your platform before using this gem. The source file `terminal.c` is located in the `/src` directory of the gem. Before compiling, you need to install a suitable version of the `libtsm` library for your platform. For Darwin based systems, a reliable source is 
+[https://github.com/skade/libtsm](https://github.com/skade/libtsm). For other distributions, see [http://www.freedesktop.org/wiki/Software/kmscon/libtsm](http://www.freedesktop.org/wiki/Software/kmscon/libtsm).
 
 Once `libtsm` has been installed, compile `terminal.c`:
 
     $ gcc -O3 -o terminal terminal.c -ltsm
 
-The resulting binary file `terminal` should be placed in `/usr/bin` or similar, or added to the $PATH.
+The resulting binary file `terminal` should be placed in your binaries folder (e.g. `/usr/bin`), or added to the $PATH environment variable.
 
 
 ## Usage
 
-Asciinema-rails consists of two parts - a Convertor module for creatiing Asciinema player files, and an engine that allows you to playback the files from your own site.
+Asciinema-rails consists of two parts - a Convertor module for creating player files, and an engine that provides the assets that allow you to playback the files from your own site.
 
 ### Asciinema::Rails::Convertor
 
-Asciinema::Rails::Convertor has two methods, one to generate player files from Asciinema recording files (JSON), and another to covert Sudosh log files to the Asciinema recording format (which can then be used to create player files.)
+Asciinema::Rails::Convertor has two methods, one to generate player files from Asciinema asciicast files, and another to covert Sudosh log files to the Asciinema asciicast format (which can then be used to create player files.)
 
+#### Creating playback files from asciicasts
+From within your Rails application or terminal, create playback files using the `asciicast_to_playback` function:
 
+    Asciinema::Rails::Convertor.asciicast_to_playback(asciicast_path, {playback_path: '/path/to/playback/file'})
 
-    Asciinema::Rails::Convertor.to_infile(sudosh_timing_file_location, sudosh_script_file_location)
+where `asciicast_path` is the path to the file created after running the Asciinema recorder and `playback_path` is the path to save the new file.
 
-returns a JSON string in the correct format for upload to asciinema.org.
+#### Creating asciicasts from Sudosh log files
+To create a playback file from Sudosh log files, you must first covert them to the Asciinma asciicast format using the `sudosh_to_asciicast` function:
+
+    Asciinema::Rails::Convertor.sudosh_to_asciicast(sudosh_timing_file_path, sudosh_script_file_path, {asciicast_path: /path/to/asciicast/file})
+
+where `asciicast_path` is the path to save the new asciicast file. If the width and height of the Susodh session terminal are available, these values can be passed in as additional parameters so that the resulting player is the original size of the terminal session. Note that Playback files can be generated from the resulting asciicast using the `asciicast_to_playback` method above. 
 
 ### Rails Engine
 
@@ -74,64 +82,19 @@ Then include the player markup and javascript in any of your views:
       });
     <% end %>
 
-In this case, the Asciinema player file `recording.json` has been placed in the public directory of the app. This can be replaced with a fully qualified url, as long as it points to a player file.
+In this example, the Asciinema player file `recording.json` has been placed in the public directory of the app. This can be replaced with a fully qualified url, as long as it points to a player file.
 
-The parameters sent to the asciinema.Movie constructor are the terminal width (cols), height (rows), playback file source, snapshot and playback speed. 
-
-The width, height and snapshot string are returned form the Asciinema::Rails::Convertor.to_outfile method. Typically, player files would be associated with a Rails model, and this information would be saved as model fields when the playback files are generated.
-
-## 
-
-
-Create a new rails application.
-Follow the steps above under Installation.
-Create an Asciinema player file:
-a) From the output file of the Asciinema binary:
-
-Asciinema::Rails::Convertor.to_outfile('/Users/eddiej/Rails/asciinemosh/recording', {outfile_location: '/tmp/recording.json'})
-
-b) From a pair of Sudosh log files:
-
-Include the asciienmosh assets:
-in app/assets/javascripts/application.js - 
-
-//= require asciinema-rails
-
-in app/assets/stylesheets/applications.css
-
-*= require asciinema-rails
-
-
-// include player markup and javascript in any of your views:
-
-```html
-<div id='player-container'></div>
-
-<%= javascript_tag do %>
-  $(function() {
-    function createPlayer() {
-      var source = new asciinema.HttpArraySource("recording.json", 1);
-      var snapshot = []
-      var movie = new asciinema.Movie(180, 43, source, snapshot, 9);
-
-      React.renderComponent(
-        asciinema.Player({ autoPlay: true, movie: movie }),
-        $('#player-container')[0]
-      );
-    }
-    createPlayer();
-  });
-<% end %>
-```
-
-When a player file is generated by the gem by calling .asdsd
-a static snapshot string is returned. This can be saved in a model field for instance, and used to show a preview of the video playback.
-
+The parameters sent to the `asciinema.Movie` constructor are the terminal width (cols), height (rows), playback file source, snapshot and playback speed. 
+The width, height and snapshot string are returned form the `Asciinema::Rails::Convertor.asciicast_to_playback` method. Typically, player files would be associated with a Rails model, and this information would be saved as model fields when the playback files are generated.
 
 
 ## Testing
+The test for the gem are written in Rspec:
 
     bundle exec rspec spec
+
+## Demo
+A demo of the player is available at [http://eddiej.github.io/asciinema-rails](http://eddiej.github.io/asciinema-rails). The embedded player shows a recording if the gem being installed and used in a new Rails application.
 
 ## Contributing
 
