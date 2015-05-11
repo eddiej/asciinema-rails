@@ -39,12 +39,12 @@
 <script>
   $(function() {
     function createPlayer() {
-      var source = new asciinema.HttpArraySource("recording", 1);
+      var source = new asciinema.HttpArraySource("tutorial.playback", 2);
       var snapshot = []
-      var movie = new asciinema.Movie(125, 25, source, snapshot, 9);
+      var movie = new asciinema.Movie(148, 28, source, snapshot, 374.99);
 
       React.renderComponent(
-        asciinema.Player({ autoPlay: true, movie: movie }),
+        asciinema.Player({ autoPlay: false, movie: movie }),
         $('#player-container')[0]
       );
     }
