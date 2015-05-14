@@ -1,6 +1,8 @@
 # Asciinema-Rails
 
-Asciinema-rails is a gem that allows you to generate playback files from Asciinema asciicasts or Sudosh log filess and host them from your own website using the bundled player.
+TLDR: Record terminal sessions and play them back from your own website.
+
+Asciinema-rails is a gem that allows you to generate playback files from Asciinema asciicasts or Sudosh log files and host them from your own website using the bundled player.
 
 ## Installation
 
