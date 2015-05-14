@@ -1,6 +1,6 @@
 # Asciinema-Rails
 
-TLDR: Record terminal sessions and play them back from your own website.
+TLDR: Record terminal sessions from local or remote machines and play them back from your own website. See the demo at [http://eddiej.github.io/asciinema-rails](http://eddiej.github.io/asciinema-rails).
 
 Asciinema-rails is a gem that allows you to generate playback files from Asciinema asciicasts or Sudosh log files and host them from your own website using the bundled player.
 
