@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "asciinema-rails"
   spec.version       = Asciinema::Rails::VERSION
   spec.authors       = ["Eddie Johnston"]
-  spec.email         = ["eddie@beanstalk.ie"]
+  spec.email         = ["eddiej@gmail.com"]
   spec.summary       = %q{Converts sudosh log files to asciinema format.}
   spec.homepage      = ""
   spec.license       = "MIT"
