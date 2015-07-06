@@ -69,19 +69,7 @@ Then include the player markup and javascript in any of your views:
     <div id='player-container'></div> <!-- the div that will contain the player -->
 
     <%= javascript_tag do %>
-      $(function() {
-        function createPlayer() {
-          var source = new asciinema.HttpArraySource("recording.json", 1);
-          var snapshot = []
-          var movie = new asciinema.Movie(180, 43, source, snapshot, 9);
-
-          React.renderComponent(
-            asciinema.Player({ autoPlay: true, movie: movie }),
-            $('#player-container')[0]
-          );
-        }
-        createPlayer();
-      });
+        asciinema.CreatePlayer(document.getElementById('player-container'), 80, 24, '/recording.json', 123.0, { speed: 1 })
     <% end %>
 
 In this example, the Asciinema player file `recording.json` has been placed in the public directory of the app. This can be replaced with a fully qualified url, as long as it points to a player file.
