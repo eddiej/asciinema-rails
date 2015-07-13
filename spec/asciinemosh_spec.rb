@@ -3,17 +3,17 @@ require 'asciinema-rails'
 require 'tempfile'
 
 describe Asciinema::Rails::Convertor do
-  describe '.to_infile' do
+  describe '.sudosh_to_asciicast' do
     context 'with invalid arguments' do
       it "should raise an ArgumentError" do
-        expect{ Asciinema::Rails::Convertor.to_infile }.to raise_error(ArgumentError)
+        expect{ Asciinema::Rails::Convertor.sudosh_to_asciicast }.to raise_error(ArgumentError)
       end
     end
     context 'with valid arguments' do
       before do
         @timing_file_location = "#{File.dirname(__FILE__)}/fixtures/sudosh-time"
         @script_file_location = "#{File.dirname(__FILE__)}/fixtures/sudosh-script"
-        @outfile = Asciinema::Rails::Convertor.to_infile(@timing_file_location, @script_file_location, {original_terminal_cols: 180, original_terminal_rows: 40})
+        @outfile = Asciinema::Rails::Convertor.sudosh_to_asciicast(@timing_file_location, @script_file_location, {original_terminal_cols: 180, original_terminal_rows: 40})
       end
       it 'returns a File or Tempfile' do
         expect(@outfile).to respond_to(:close)
@@ -30,14 +30,14 @@ describe Asciinema::Rails::Convertor do
     end
   end
 
-   describe '.to_outfile' do
+   describe '.asciicast_to_playback' do
     context 'with valid arguments' do
       before do
         @timing_file_location = "#{File.dirname(__FILE__)}/fixtures/sudosh-time"
         @script_file_location = "#{File.dirname(__FILE__)}/fixtures/sudosh-script"
         
-        infile = Asciinema::Rails::Convertor.to_infile(@timing_file_location, @script_file_location, {original_terminal_cols: 180, original_terminal_rows: 40})
-        @output = Asciinema::Rails::Convertor.to_outfile(infile.path, {outfile_location: '/tmp/index.json.erb'})
+        infile = Asciinema::Rails::Convertor.sudosh_to_asciicast(@timing_file_location, @script_file_location, {original_terminal_cols: 180, original_terminal_rows: 40})
+        @output = Asciinema::Rails::Convertor.asciicast_to_playback(infile.path, {outfile_location: '/tmp/index.json.erb'})
         
       end
       it "returns an array of three values" do

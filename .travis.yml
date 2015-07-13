@@ -1,0 +1,15 @@
+language: ruby
+rvm:
+  - 2.2.0
+
+before_install:
+  - gem install bundler -v 1.8
+
+script: 'bundle exec rspec'
+
+notifications:
+  email:
+    recipients:
+      - eddiej@gmail.com
+    on_failure: change
+    on_success: never

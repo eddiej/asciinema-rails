@@ -84,7 +84,7 @@ The test for the gem are written in Rspec:
     bundle exec rspec spec
 
 ## Demo
-A demo of the player is available at [http://eddiej.github.io/asciinema-rails](http://eddiej.github.io/asciinema-rails). The embedded player shows a recording if the gem being installed and used in a new Rails application.
+A demo of the player is available at [http://eddiej.github.io/asciinema-rails](http://eddiej.github.io/asciinema-rails). The embedded player shows a recording of the gem being installed and used in a new Rails application.
 
 ## Contributing
 
